@@ -47,19 +47,25 @@ export type Character = z.infer<typeof characterSchema>;
 import { z } from 'zod';
 
 export const moveSchema = z.object({
-  id: z.string().uuid().describe('技ごとの一意なID'),
-  name: z.string().describe('技名 (例: 波動拳)'),
-  command: z.string().describe('コマンド (例: 236P)'),
-  type: z.enum(['special', 'super', 'normal', 'throw']).describe('技の種類'),
-  startup: z.string().describe('発生フレーム'),
-  active: z.string().describe('持続フレーム'),
-  recovery: z.string().describe('硬直フレーム'),
-  onHit: z.string().describe('ヒット時フレーム'),
-  onBlock: z.string().describe('ガード時フレーム'),
-  damage: z.string().describe('ダメージ'),
-  stun: z.string().describe('スタン値'),
-  driveGauge: z.string().describe('ドライブゲージ増減'),
-  notes: z.string().optional().describe('備考'),
+  id: z.string().uuid().describe("技ごとの一意なID"),
+  name: z.string().describe("技名 (例: 波動拳)"),
+  commandClassic: z.string().describe("クラシック操作のコマンド (例: 236P)"),
+  commandModern: z.string().optional().describe("モダン操作のコマンド (例: N + SP)"),
+  type: z.enum(["normal", "special", "super", "throw", "system"]).describe("技の種類"),
+  startup: z.string().describe("発生フレーム"),
+  active: z.string().describe("持続フレーム"),
+  recovery: z.string().describe("硬直フレーム"),
+  onHit: z.string().describe("ヒット時硬直差"),
+  onBlock: z.string().describe("ガード時硬直差"),
+  cancel: z.string().optional().describe("キャンセル可否"),
+  damage: z.string().describe("ダメージ"),
+  scaling: z.string().optional().describe("コンボ補正値"),
+  driveGaugeOnHit: z.string().optional().describe("Dゲージ増加(ヒット時)"),
+  driveGaugeOnBlock: z.string().optional().describe("Dゲージ減少(ガード時)"),
+  driveGaugeOnPunish: z.string().optional().describe("Dゲージ減少(パニッシュカウンター時)"),
+  saGauge: z.string().optional().describe("SAゲージ増加量"),
+  attribute: z.string().optional().describe("属性 (上, 中, 下, 投, 弾など)"),
+  notes: z.string().optional().describe("備考"),
 });
 
 export type Move = z.infer<typeof moveSchema>;
@@ -67,7 +73,12 @@ export type Move = z.infer<typeof moveSchema>;
 
 ### Vercel KVでの保存形式
 
-キャラクターごとに技リストを保存します。キーにキャラクターIDを含めることで、特定のキャラクターの技データを効率的に取得できるようにします。
+キャラクターごとに技リストを保存します。キーにキャラクターIDを含めることで、**特定のキャラクターの技データを効率的に取得**できるようにします。
+この方法により、`character`データに`moveIds`のような配列を持たせる必要がなくなり、データ構造がシンプルになります。
+
+> **将来的な拡張性について**
+> 将来的に「発生フレームが5F以下の技」のように、キャラクターを横断して技の性質で検索する機能が必要になった場合、このままの構造では全キャラクターの技データを取得する必要があり非効率です。
+> その際は、`index:startup:5` のような検索条件をキーにした「逆引きインデックス」を別途作成することで、高速な検索を実現できます。このインデックスは後から追加可能なため、現時点では考慮しません。
 
 -   **Key**: `moves:[characterId]` (例: `moves:ryu`)
 -   **Type**: `JSON`
@@ -77,17 +88,24 @@ export type Move = z.infer<typeof moveSchema>;
     [
       {
         "id": "...",
-        "name": "波動拳",
-        "command": "236P",
+        "name": "弱 波動拳",
+        "commandClassic": "236LP",
+        "commandModern": "N + SP",
         "type": "special",
-        "startup": "14F",
-        "active": "...",
-        "recovery": "33F",
-        "onHit": "+1",
-        "onBlock": "-6",
-        "damage": "600",
-        "stun": "100",
-        "driveGauge": "+1000"
+        "startup": "16",
+        "active": "",
+        "recovery": "47",
+        "onHit": "2",
+        "onBlock": "-5",
+        "cancel": "SA3",
+        "damage": "700",
+        "scaling": "",
+        "driveGaugeOnHit": "1000",
+        "driveGaugeOnBlock": "-2500",
+        "driveGaugeOnPunish": "-3000",
+        "saGauge": "600",
+        "attribute": "上・弾",
+        "notes": ""
       }
     ]
     ```
