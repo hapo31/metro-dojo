@@ -6,31 +6,31 @@
 
 このフェーズでは、`docs/00_setup.md` に基づいてプロジェクトの基盤を構築します。
 
--   [ ] pnpm ワークスペースの初期化 (`package.json`, `pnpm-workspace.yaml`)
--   [ ] Next.js アプリケーションの作成 (`apps/web`)
--   [ ] 共通パッケージディレクトリの作成 (`packages/api`, `packages/ui`, `packages/tsconfig`)
--   [ ] 依存ライブラリのインストール
-    -   [ ] Next.js & tRPC 関連
-    -   [ ] Vercel KV
--   [ ] Storybook のセットアップ
--   [ ] tRPC の設定
-    -   [ ] `packages/api` に tRPC ルーターの雛形を作成
-    -   [ ] `apps/web` に tRPC クライアントの設定を追加
--   [ ] `packages/tsconfig` に共通の `tsconfig.json` を作成し、各パッケージから参照するように設定
--   [ ] Prettier, ESLint の設定
+-   [x] pnpm ワークスペースの初期化 (`package.json`, `pnpm-workspace.yaml`)
+-   [x] Next.js アプリケーションの作成 (`apps/web`)
+-   [x] 共通パッケージディレクトリの作成 (`packages/api`, `packages/ui`, `packages/tsconfig`)
+-   [x] 依存ライブラリのインストール
+    -   [x] Next.js & tRPC 関連
+    -   [x] Vercel KV
+-   [x] Storybook のセットアップ
+-   [x] tRPC の設定
+    -   [x] `packages/api` に tRPC ルーターの雛形を作成
+    -   [x] `apps/web` に tRPC クライアントの設定を追加
+-   [x] `packages/tsconfig` に共通の `tsconfig.json` を作成し、各パッケージから参照するように設定
+-   [x] Prettier, ESLint の設定
 
 ## Phase 2: バックエンド実装 (tRPC & Vercel KV)
 
 技データを管理するためのバックエンド機能を実装します。
 
--   [ ] `docs/03_data_model.md` にて技データのスキーマを定義
+-   [x] `docs/03_data_model.md` にて技データのスキーマを定義
 -   [ ] Vercel KV にマスターデータを投入するためのseedスクリプトを作成
     -   [ ] 全キャラクターリスト
     -   [ ] 各キャラクターの技データ
--   [ ] `packages/api` に tRPC プロシージャを実装
-    -   [ ] `character.list`: 全キャラクターのリストを取得する
-    -   [ ] `move.findByCharacter`: 指定されたキャラクターの技リストを取得する
--   [ ] Zod を用いて、APIの入力と出力の型を定義
+-   [x] `packages/api` に tRPC プロシージャを実装
+    -   [x] `character.list`: 全キャラクターのリストを取得する
+    -   [x] `move.findByCharacter`: 指定されたキャラクターの技リストを取得する
+-   [x] Zod を用いて、APIの入力と出力の型を定義
 
 ## Phase 3: UIコンポーネント実装 (Storybook)
 
