@@ -1,6 +1,12 @@
 {
   "name": "@metro-dojo/api",
   "version": "0.1.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./schema": "./schema.ts"
+  },
   "license": "MIT",
   "scripts": {
     "lint": "eslint . --max-warnings 0",

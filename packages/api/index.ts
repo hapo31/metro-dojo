@@ -4,11 +4,11 @@ import { createTRPCRouter, publicProcedure } from "./trpc";
 import { kv } from "@vercel/kv";
 
 const characterRouter = createTRPCRouter({
-  getCharacters: publicProcedure.query(async () => {
+  list: publicProcedure.query(async () => {
     const characters = await kv.get<z.infer<typeof characterSchema>[]>("characters");
     return characters ?? [];
   }),
-  getCharacterById: publicProcedure.input(z.object({ id: z.string() })).query(async ({ input }) => {
+  findById: publicProcedure.input(z.object({ id: z.string() })).query(async ({ input }) => {
     const characters = await kv.get<z.infer<typeof characterSchema>[]>("characters");
     const character = characters?.find((c) => c.id === input.id);
     return character ?? null;
@@ -16,7 +16,7 @@ const characterRouter = createTRPCRouter({
 });
 
 const moveRouter = createTRPCRouter({
-  getMovesByCharacterId: publicProcedure
+  findByCharacter: publicProcedure
     .input(z.object({ characterId: z.string() }))
     .query(async ({ input }) => {
       const moves = await kv.get<z.infer<typeof moveSchema>[]>(`moves:${input.characterId}`);

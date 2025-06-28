@@ -2,6 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { api } from "@/app/_trpc/client";
+import type { Move } from "@metro-dojo/api/schema";
 
 export default function CharacterPage() {
   const params = useParams();
@@ -11,13 +12,13 @@ export default function CharacterPage() {
     data: moves,
     isLoading: isLoadingMoves,
     isError: isErrorMoves,
-  } = api.move.getMovesByCharacterId.useQuery({ characterId }, { enabled: !!characterId });
+  } = api.move.findByCharacter.useQuery({ characterId }, { enabled: !!characterId });
 
   const {
     data: character,
     isLoading: isLoadingCharacter,
     isError: isErrorCharacter,
-  } = api.character.getCharacterById.useQuery({ id: characterId }, { enabled: !!characterId });
+  } = api.character.findById.useQuery({ id: characterId }, { enabled: !!characterId });
 
   if (isLoadingMoves || isLoadingCharacter) {
     return (
@@ -54,7 +55,7 @@ export default function CharacterPage() {
             </tr>
           </thead>
           <tbody>
-            {moves?.map((move) => (
+            {moves?.map((move: Move) => (
               <tr key={move.id} className="border-t border-gray-700 hover:bg-gray-700">
                 <td className="p-4">{move.name}</td>
                 <td className="p-4 font-mono">{move.commandClassic}</td>

@@ -2,11 +2,15 @@
   "name": "metro-dojo",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter web dev",
-    "build": "pnpm --filter web build",
-    "start": "pnpm --filter web start",
-    "lint": "pnpm --filter \"./packages/**\" lint && pnpm --filter web lint",
-    "storybook": "pnpm --filter web storybook",
-    "build-storybook": "pnpm --filter web build-storybook"
+    "dev": "pnpm --filter @metro-dojo/web dev",
+    "build": "pnpm build --filter \"./packages/**\" --filter @metro-dojo/web",
+    "start": "pnpm --filter @metro-dojo/web start",
+    "lint": "pnpm --parallel lint",
+    "db:seed": "pnpm --filter @metro-dojo/api db:seed",
+    "storybook": "pnpm --filter @metro-dojo/web storybook",
+    "build-storybook": "pnpm --filter @metro-dojo/web build-storybook",
+    "add:web": "pnpm add --filter @metro-dojo/web",
+    "add:api": "pnpm add --filter @metro-dojo/api",
+    "add:ui": "pnpm add --filter @metro-dojo/ui"
   }
 }
