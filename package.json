@@ -9,7 +9,7 @@
     "db:seed": "pnpm --filter @metro-dojo/api db:seed",
     "storybook": "pnpm --filter @metro-dojo/web storybook",
     "build-storybook": "pnpm --filter @metro-dojo/web build-storybook",
-    "add:web": "pnpm add --filter @metro-dojo/web",
+    "add:web": "pnpm add --filter web",
     "add:api": "pnpm add --filter @metro-dojo/api",
     "add:ui": "pnpm add --filter @metro-dojo/ui"
   }
