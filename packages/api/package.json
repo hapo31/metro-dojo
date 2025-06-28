@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "dev": "tsx --watch index.ts",
     "lint": "eslint . --max-warnings 0",
     "db:seed": "tsx seed.ts"
   },

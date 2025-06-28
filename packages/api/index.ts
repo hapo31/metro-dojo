@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { characterSchema, moveSchema } from "./schema";
 import { createTRPCRouter, publicProcedure } from "./trpc";
+import { createHTTPServer } from "@trpc/server/adapters/standalone";
+
 import { kv } from "@vercel/kv";
 
 const characterRouter = createTRPCRouter({
@@ -28,5 +30,10 @@ export const appRouter = createTRPCRouter({
   character: characterRouter,
   move: moveRouter,
 });
+
+const server = createHTTPServer({
+  router: appRouter,
+});
+server.listen(3000);
 
 export type AppRouter = typeof appRouter;

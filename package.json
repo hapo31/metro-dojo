@@ -2,15 +2,20 @@
   "name": "metro-dojo",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter @metro-dojo/web dev",
-    "build": "pnpm build --filter \"./packages/**\" --filter @metro-dojo/web",
-    "start": "pnpm --filter @metro-dojo/web start",
+    "dev:web": "pnpm --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "dev": "run-p dev:web dev:api",
+    "build": "pnpm build --filter \"./packages/**\" --filter web",
+    "start": "pnpm --filter web start",
     "lint": "pnpm --parallel lint",
     "db:seed": "pnpm --filter @metro-dojo/api db:seed",
-    "storybook": "pnpm --filter @metro-dojo/web storybook",
-    "build-storybook": "pnpm --filter @metro-dojo/web build-storybook",
+    "storybook": "pnpm --filter web storybook",
+    "build-storybook": "pnpm --filter web build-storybook",
     "add:web": "pnpm add --filter web",
     "add:api": "pnpm add --filter @metro-dojo/api",
     "add:ui": "pnpm add --filter @metro-dojo/ui"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }
