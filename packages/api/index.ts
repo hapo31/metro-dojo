@@ -1,15 +1,27 @@
-import { initTRPC } from "@trpc/server";
 import { z } from "zod";
+import { characterSchema, moveSchema } from "./schema";
+import { createTRPCRouter, publicProcedure } from "./trpc";
+import { kv } from "@vercel/kv";
 
-const t = initTRPC.create();
-
-export const appRouter = t.router({
-  // この後、ここにプロシージャを追加していきます
-  // 例:
-  // greeting: t.procedure.input(z.object({ name: z.string() })).query(({ input }) => {
-  //   return `Hello, ${input.name}!`;
-  // }),
+const characterRouter = createTRPCRouter({
+  getCharacters: publicProcedure.query(async () => {
+    const characters = await kv.get<z.infer<typeof characterSchema>[]>("characters");
+    return characters ?? [];
+  }),
 });
 
-// フロントエンドとバックエンドで型を共有するためにエクスポートします
+const moveRouter = createTRPCRouter({
+  getMovesByCharacterId: publicProcedure
+    .input(z.object({ characterId: z.string() }))
+    .query(async ({ input }) => {
+      const moves = await kv.get<z.infer<typeof moveSchema>[]>(`moves:${input.characterId}`);
+      return moves ?? [];
+    }),
+});
+
+export const appRouter = createTRPCRouter({
+  character: characterRouter,
+  move: moveRouter,
+});
+
 export type AppRouter = typeof appRouter;
