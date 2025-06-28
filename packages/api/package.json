@@ -9,17 +9,17 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "tsx --watch index.ts",
+    "dev": "tsx --watch src/server.ts",
     "lint": "eslint . --max-warnings 0",
     "db:seed": "tsx seed.ts"
   },
   "dependencies": {
-    "@trpc/server": "^10.45.2",
+    "@trpc/server": "^11.4.3",
     "@vercel/kv": "^3.0.0",
     "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@types/node": "^20.19.2",
+    "@types/node": "^24.0.7",
     "@types/uuid": "^10.0.0",
     "eslint": "^8.57.0",
     "tsx": "^4.20.3",

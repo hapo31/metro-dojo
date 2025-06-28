@@ -5,19 +5,19 @@ import { httpBatchLink, loggerLink } from "@trpc/client";
 import { useState } from "react";
 import { api } from "./client";
 import type { AppRouter } from "@metro-dojo/api";
-import { createTRPCClient } from "@trpc/client";
 import superjson from "superjson";
 
 const getBaseUrl = () => {
   if (typeof window !== "undefined") return "";
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return "http://localhost:3000";
+  return process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 };
 
 export function TRPCProvider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
-    createTRPCClient<AppRouter>({
+    api.createClient({
+      transformer: superjson,
       links: [
         loggerLink({
           enabled: (opts) =>
@@ -28,7 +28,6 @@ export function TRPCProvider({ children }: { children: React.ReactNode }) {
           url: `${getBaseUrl()}/api/trpc`,
         }),
       ],
-      transformer: superjson,
     })
   );
   return (

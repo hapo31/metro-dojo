@@ -2,9 +2,9 @@
   "name": "metro-dojo",
   "private": true,
   "scripts": {
-    "dev:web": "pnpm --filter web dev",
-    "dev:api": "pnpm --filter api dev",
-    "dev": "run-p dev:web dev:api",
+    "dev:web": "PORT=3000 NEXT_PUBLIC_API_URL=http://localhost:3001 pnpm --filter web dev",
+    "dev:api": "PORT=3001 pnpm --filter api dev",
+    "dev": "run-p dev:api dev:web",
     "build": "pnpm build --filter \"./packages/**\" --filter web",
     "start": "pnpm --filter web start",
     "lint": "pnpm --parallel lint",
