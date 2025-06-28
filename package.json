@@ -1,0 +1,12 @@
+{
+  "name": "metro-dojo",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "start": "pnpm --filter web start",
+    "lint": "pnpm --filter \"./packages/**\" lint && pnpm --filter web lint",
+    "storybook": "pnpm --filter web storybook",
+    "build-storybook": "pnpm --filter web build-storybook"
+  }
+}
