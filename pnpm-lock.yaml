@@ -10,6 +10,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@metro-dojo/api':
+        specifier: workspace:*
+        version: link:../../packages/api
       '@tanstack/react-query':
         specifier: ^5.81.5
         version: 5.81.5(react@19.1.0)

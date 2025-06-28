@@ -9,13 +9,17 @@ export default function CharacterPage() {
 
   const {
     data: moves,
-    isLoading,
-    isError,
+    isLoading: isLoadingMoves,
+    isError: isErrorMoves,
   } = api.move.getMovesByCharacterId.useQuery({ characterId }, { enabled: !!characterId });
 
-  // TODO: Add a query to get character details (like name) to display in the title.
+  const {
+    data: character,
+    isLoading: isLoadingCharacter,
+    isError: isErrorCharacter,
+  } = api.character.getCharacterById.useQuery({ id: characterId }, { enabled: !!characterId });
 
-  if (isLoading) {
+  if (isLoadingMoves || isLoadingCharacter) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center bg-gray-900 text-white">
         <p>Loading moves...</p>
@@ -23,17 +27,19 @@ export default function CharacterPage() {
     );
   }
 
-  if (isError) {
+  if (isErrorMoves || isErrorCharacter) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center bg-gray-900 text-white">
-        <p>Error loading moves.</p>
+        <p>Error loading character data.</p>
       </main>
     );
   }
 
   return (
     <main className="container mx-auto p-8 text-white">
-      <h1 className="text-4xl font-bold mb-8 capitalize">{characterId} Moves</h1>
+      <h1 className="text-4xl font-bold mb-8 capitalize">
+        {character?.name ?? characterId} 技一覧
+      </h1>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-gray-800">
           <thead>

@@ -8,6 +8,11 @@ const characterRouter = createTRPCRouter({
     const characters = await kv.get<z.infer<typeof characterSchema>[]>("characters");
     return characters ?? [];
   }),
+  getCharacterById: publicProcedure.input(z.object({ id: z.string() })).query(async ({ input }) => {
+    const characters = await kv.get<z.infer<typeof characterSchema>[]>("characters");
+    const character = characters?.find((c) => c.id === input.id);
+    return character ?? null;
+  }),
 });
 
 const moveRouter = createTRPCRouter({

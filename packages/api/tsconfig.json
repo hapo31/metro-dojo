@@ -1,6 +1,10 @@
 {
-  "extends": "../tsconfig/base.json",
-  "compilerOptions": {},
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false
+  },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }

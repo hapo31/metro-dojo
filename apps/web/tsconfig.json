@@ -1,5 +1,5 @@
 {
-  "extends": "../../packages/tsconfig/base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -21,8 +21,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@metro-dojo/api": ["../../packages/api/index.ts"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
