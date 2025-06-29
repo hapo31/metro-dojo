@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, loggerLink } from "@trpc/client";
 import { useState } from "react";
 import { api } from "./client";
-import type { AppRouter } from "@metro-dojo/api";
+import type { AppRouter as _AppRouter } from "@metro-dojo/api";
 import superjson from "superjson";
 
 const getBaseUrl = () => {

@@ -9,7 +9,7 @@ import { appRouter } from "@metro-dojo/api";
  * データベース接続やセッション情報などをコンテキストに追加できます。
  * 今回はコンテキストを使用しないため、空のオブジェクトを返します。
  */
-const createContext = async (req: NextRequest) => {
+const createContext = async (_req: NextRequest) => {
   return {};
 };
 

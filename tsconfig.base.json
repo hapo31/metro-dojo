@@ -9,7 +9,12 @@
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
     "isolatedModules": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@metro-dojo/api": ["packages/api/src/index.ts"],
+      "@metro-dojo/ui/*": ["packages/ui/src/*"]
+    },
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,

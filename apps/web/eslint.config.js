@@ -17,12 +17,11 @@ export default [
       ...reactPlugin.configs.recommended.rules,
       ...hooksPlugin.configs.recommended.rules,
       ...jsxA11yPlugin.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off",
-      "react/no-unescaped-entities": "off",
+      "react/react-in-jsx-scope": "off"
     },
     languageOptions: {
       parserOptions: {
-        project: ["./tsconfig.json", "./.storybook/tsconfig.json"],
+        project: ["./tsconfig.json"],
         tsconfigRootDir: import.meta.dirname,
       },
     },

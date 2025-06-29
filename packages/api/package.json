@@ -1,6 +1,7 @@
 {
   "name": "@metro-dojo/api",
   "version": "0.1.0",
+  "type": "module",
   "main": "./index.ts",
   "types": "./index.ts",
   "exports": {
@@ -10,7 +11,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsx --watch src/server.ts",
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "db:seed": "tsx seed.ts"
   },
   "dependencies": {
