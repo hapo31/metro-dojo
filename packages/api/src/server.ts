@@ -1,5 +1,5 @@
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
-import { appRouter } from "../index";
+import { appRouter } from "./index";
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
 

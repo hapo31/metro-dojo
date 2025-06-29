@@ -1,10 +1,13 @@
 import { initTRPC } from "@trpc/server";
+import superjson from "superjson";
 
 /**
  * tRPCの初期化
  * ここでコンテキストの型などを定義することも可能
  */
-const t = initTRPC.create();
+const t = initTRPC.create({
+  transformer: superjson,
+});
 
 /**
  * tRPCルーターを作成するためのヘルパー

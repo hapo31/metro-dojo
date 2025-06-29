@@ -16,6 +16,7 @@ node_modules
 # Production
 /build
 /dist
+packages/api/dist
 .DS_Store
 
 # Vercel

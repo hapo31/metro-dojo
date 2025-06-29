@@ -1,8 +1,8 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { api } from "@/app/_trpc/client";
 import type { Move } from "@metro-dojo/api/schema";
+import { api } from "apps/web/src/app/_trpc/client";
 
 export default function CharacterPage() {
   const params = useParams();

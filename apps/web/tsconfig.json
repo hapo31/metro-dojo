@@ -29,7 +29,6 @@
         "./src/*"
       ]
     },
-    "composite": true
   },
   "include": [
     "**/*.ts",
