@@ -1,11 +1,15 @@
 "use client";
 
+import type { Character } from "@metro-dojo/api/schema";
 import Link from "next/link";
 import { api } from "./_trpc/client";
-import type { Character } from "@metro-dojo/api/schema";
 
 export default function Home() {
-  const { data: characters, isLoading, isError } = api.character.list.useQuery();
+  const {
+    data: characters,
+    isLoading,
+    isError,
+  } = api.character.list.useQuery();
 
   if (isLoading) {
     return (
@@ -25,7 +29,9 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-900 text-white p-8">
-      <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem] mb-12">Metro Dojo</h1>
+      <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem] mb-12">
+        Metro Dojo
+      </h1>
       <h2 className="text-3xl font-bold mb-8">Select Your Character</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {characters?.map((character: Character) => (
