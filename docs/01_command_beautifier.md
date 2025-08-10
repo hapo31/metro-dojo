@@ -10,41 +10,46 @@
 
 ## ディレクトリ構成案
 
-本機能は、Next.js で構築された `apps/web` の一部として実装する。
+本機能は、`packages/api` に画像生成APIを、`apps/web` にフロントエンドを配置する形で実装します。これにより、関心の分離を図り、モノレポの利点を活かします。
 
 ```
-apps/web
-├── ... (既存のファイル)
-└── src
-    ├── ... (既存のファイル)
-    └── app
+.
+├── apps
+│   └── web
+│       ├── ... (既存のファイル)
+│       └── src
+│           └── app
+│               ├── ... (既存のファイル)
+│               └── command-beautifier
+│                   ├── page.tsx          # 画像生成フォームのメインページ
+│                   └── components
+│                       ├── Preview.tsx   # 生成画像のプレビュー
+│                       └── Form.tsx      # パラメータ入力フォーム
+└── packages
+    └── api
         ├── ... (既存のファイル)
-        ├── api
-        │   └── trpc
-        │       └── [trpc]
-        │           ├── ... (既存のファイル)
-        │           └── image.ts  # 画像生成API
-        └── command-beautifier
-            ├── page.tsx          # 画像生成フォーム
-            └── components
-                ├── Preview.tsx   # 生成画像のプレビュー
-                └── Form.tsx      # パラメータ入力フォーム
+        └── src
+            ├── server.ts       # tRPCルーターの結合
+            └── routers
+                └── image.ts    # 画像生成APIのtRPCルーター
 ```
 
 ### 各コンポーネントの役割
 
-- **`image.ts`**:
-  - tRPC のエンドポイントとして、画像生成リクエストを受け付ける。
-  - URL パラメータからキャラクター、コマンド、スタイルなどの情報を受け取る。
-  - `sharp` を用いて、受け取った情報に基づき画像を動的に生成する。
-  - 生成した画像をレスポンスとして返す。
-- **`page.tsx`**:
+- **`packages/api/src/routers/image.ts`**:
+  - 画像生成ロジックを担当する tRPC ルーター。
+  - `sharp` を利用して、キャラクター、コマンド、スタイルなどの情報に基づき画像を動的に生成します。
+  - Base64エンコードされた画像データなど、フロントエンドで表示可能な形式で結果を返します。
+  - このルーターは `packages/api/src/server.ts` の `appRouter` に統合されます。
+
+- **`apps/web/src/app/command-beautifier/page.tsx`**:
   - Command Beautifier 機能のトップページ。
-  - `Preview` と `Form` コンポーネントを配置する。
-- **`Preview.tsx`**:
-  - `Form` で入力された内容に基づき、生成される画像のプレビューをリアルタイムに表示する。
-  - 内部的には、`image.ts` と同じロジックで画像を生成するか、あるいは `image.ts` を呼び出して画像 URL を取得し、それを `<img>` タグで表示する。
-- **`Form.tsx`**:
-  - ユーザーがコマンドや表示スタイルなどを入力・選択するためのフォーム。
-  - 入力値が変更されるたびに、`Preview` コンポーネントにその内容を通知する。
-  - 最終的に、`image.ts` を呼び出すための URL を生成し、ユーザーに提供する。
+  - `Preview` と `Form` コンポーネントを配置し、状態管理の責務を持ちます。
+
+- **`apps/web/src/app/command-beautifier/components/Preview.tsx`**:
+  - `Form` で入力されたパラメータを元に、tRPC クライアント (`api.image.generate.useQuery`) を使用して画像生成APIを呼び出します。
+  - APIから受け取った画像データを表示し、ローディングやエラー状態をハンドリングします。
+
+- **`apps/web/src/app/command-beautifier/components/Form.tsx`**:
+  - ユーザーがコマンドや表示スタイルなどを入力・選択するためのフォームコンポーネント。
+  - 入力値は `page.tsx` の状態として管理され、`Preview` コンポーネントに渡されます。
