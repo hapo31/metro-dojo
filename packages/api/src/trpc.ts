@@ -19,3 +19,13 @@ export const createTRPCRouter = t.router;
  * 認証などを必要としない、公開されたプロシージャを作成するためのヘルパー
  */
 export const publicProcedure = t.procedure;
+
+/**
+ * リクエストごとにコンテキストを作成するためのヘルパー
+ * @see https://trpc.io/docs/context
+ */
+export const createTRPCContext = (opts: { headers: Headers }) => {
+  return {
+    headers: opts.headers,
+  };
+};
