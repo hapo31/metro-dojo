@@ -14,8 +14,7 @@
     "storybook": "pnpm --filter web storybook",
     "build-storybook": "pnpm --filter web build-storybook",
     "add:web": "pnpm add --filter web",
-    "add:api": "pnpm add --filter @metro-dojo/api",
-    "add:ui": "pnpm add --filter @metro-dojo/ui"
+    "add:api": "pnpm add --filter @metro-dojo/api"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.1.4",
