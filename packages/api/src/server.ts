@@ -1,10 +1,11 @@
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
-import { appRouter } from "./index";
+import { appRouter, createTRPCContext } from "./index";
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
 
 const server = createHTTPServer({
   router: appRouter,
+  createContext: () => createTRPCContext({ headers: new Headers() }),
 });
 
 server.listen(port);
