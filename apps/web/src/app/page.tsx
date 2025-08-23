@@ -5,36 +5,36 @@ export default async function Home() {
   const api = await createSsrApi();
   const data = await api.hello();
 
-  const img1 = await api.generateImage({ 
-    width: 400, 
+  const img1 = await api.generateImage({
+    width: 400,
     height: 200,
     text: "Metro Dojo",
     fontSize: 32,
     textColor: "blue",
-    backgroundColor: "lightgray"
+    backgroundColor: "lightgray",
   });
   const imgSrc1 = `data:image/png;base64,${Buffer.from(img1).toString("base64")}`;
 
-  const img2 = await api.generateImage({ 
-    width: 300, 
+  const img2 = await api.generateImage({
+    width: 300,
     height: 150,
     text: "Dynamic Text",
     fontSize: 24,
     textColor: "red",
     backgroundColor: "yellow",
     x: 150,
-    y: 75
+    y: 75,
   });
   const imgSrc2 = `data:image/png;base64,${Buffer.from(img2).toString("base64")}`;
 
-  const img3 = await api.generateImage({ 
-    width: 400, 
+  const img3 = await api.generateImage({
+    width: 400,
     height: 200,
     text: "With Image",
     fontSize: 20,
     textColor: "white",
     backgroundColor: "darkblue",
-    embedImage: true
+    embedImage: true,
   });
   const imgSrc3 = `data:image/png;base64,${Buffer.from(img3).toString("base64")}`;
 

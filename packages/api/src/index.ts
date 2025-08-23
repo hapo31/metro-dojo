@@ -44,9 +44,10 @@ export const appRouter = createTRPCRouter({
 
       // 画像を埋め込み
       if (embedImage) {
-        const imagePath = "/workspaces/metro-dojo/packages/api/src/assets/icons/button-hk.png";
+        const imagePath =
+          "/workspaces/metro-dojo/packages/api/src/assets/icons/button-hk.png";
         const image = await loadImage(imagePath);
-        
+
         // 画像を左上角に描画（デフォルト）
         ctx.drawImage(image, 10, 10);
       }
