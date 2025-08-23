@@ -16,5 +16,9 @@ RUN apt-get update && apt-get install -y \
 # Install pnpm globally
 RUN npm install -g pnpm
 
+# Install uv (Python package manager)
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.cargo/bin:$PATH"
+
 # Set working directory
 WORKDIR /workspace

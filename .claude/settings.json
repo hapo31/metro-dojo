@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/ai-principles-reminder.sh"
+            "command": "/workspaces/metro-dojo/.claude/hooks/ai-principles-reminder.sh"
           }
         ]
       }

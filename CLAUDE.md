@@ -1,10 +1,14 @@
 # CLAUDE.md
 
+You answer is in japanese.
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
 metro-dojo is a web service providing useful tools for Street Fighter 6 players, implemented as a monorepo with Next.js frontend and tRPC API backend. The main feature is Command Beautifier, which generates clean visual representations of fighting game command inputs.
+
+**Important for Claude Code**: This project is configured with Serena MCP (Model Context Protocol) to enable efficient code analysis and editing. When working with this codebase, prioritize using Serena's symbolic tools (`find_symbol`, `get_symbols_overview`, `search_for_pattern`) over reading entire files to minimize token consumption. Use the overview and targeted symbol reading approach instead of full file reads whenever possible.
 
 ## Architecture
 

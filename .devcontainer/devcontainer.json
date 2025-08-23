@@ -8,13 +8,14 @@
       "version": "lts"
     },
     "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/va-h/devcontainers-features/uv:1": {}
   },
   "customizations": {
     "vscode": {
       "extensions": [
         "biomejs.biome",
-        "anthropic.claude-dev"
+        "Anthropic.claude-code"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
@@ -43,6 +44,10 @@
       }
     }
   },
+  "initializeCommand": "mkdir -p ~/.claude || true",
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/node/.claude,type=bind"
+  ],
   "forwardPorts": [3000, 3001],
   "portsAttributes": {
     "3000": {
