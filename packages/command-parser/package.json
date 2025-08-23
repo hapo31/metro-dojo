@@ -1,0 +1,25 @@
+{
+  "name": "@metro-dojo/command-parser",
+  "version": "0.1.0",
+  "description": "コマンド表記の自然言語から内部表現への変換機能",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "fighting-game",
+    "command",
+    "parser",
+    "tokenizer"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "dist"
+  ]
+}
