@@ -113,6 +113,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
 
+  packages/command-renderer: {}
+
 packages:
 
   '@alloc/quick-lru@5.2.0':
